@@ -1,0 +1,163 @@
+.box{
+  height: 400px;
+  width: 200px;
+  overflow: auto;
+  background-color: yellow;
+}
+
+.queens--grid {
+  display: flex;
+  flex-direction: column;
+  div {
+    img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    h2, p {
+      margin: 0;
+    }
+  }
+}
+
+@media screen and (min-width: 40em){
+  .queens--grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 15px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px){
+  .queens--grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 15px
+  }
+}
+
+.message-error{
+  background: red;
+  color: white;
+  opacity: 0;
+  transition: all linear .5s;
+  &.active { //Sí invalid entonces
+    opacity: 1;
+  }
+}
+
+.line-error{
+  height: 0;
+  border-bottom: 1px solid;
+  &.invalid{
+    border-color: red;
+  }
+  &.valid{
+    border-color: green;
+  }
+}
+
+.styles{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.center{
+  height: 600px;
+  width: 500px;
+  margin: auto;
+  border: none;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 10px 10px 20px rgb(241, 188, 186);
+  position: relative;
+}
+
+.input-group{
+  margin: auto;
+  padding: 15px;
+  text-align: center;
+}
+
+.input{
+  width: 80%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  background-color: rgb(230, 230, 230);
+  font-family: Helvetica, sans-serif;
+  &.invalid{
+    border: 1px solid rgb(201, 201, 201);
+  }
+  &.valid{
+    border: 1px solid green;
+  }
+}
+
+.input:focus
+{
+    background-color: white;
+}
+
+.h1{
+  font-family: Helvetica, sans-serif;
+  text-align: center;
+}
+
+.label{
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+
+}
+
+.mensaje{
+  font-size: smaller;
+  color: red;
+  font-family: Helvetica, sans-serif;
+}
+
+.buttondiv{
+  padding: 10px;
+  margin: 0;
+  position: absolute;
+  left: 50%;
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+.linkdiv{
+  padding: 20px;
+  margin: auto;
+  position: absolute;
+  left: 30%;
+  transform: translateY(80%);
+}
+
+.button{
+  margin: 0 auto;
+  border-radius: 4px;
+  padding: 14px 40px;
+  font-size: 14px;
+}
+
+.button:disabled {
+  background-color: #dceedd; /* Green */
+  color: white;
+  cursor: pointer;
+
+}
+
+.button:enabled{
+  transition-duration: 0.4s;
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+
+.a{
+  font-family: Helvetica, sans-serif;
+  font-size: small;
+  color: #6f8dc4;
+}
+
+

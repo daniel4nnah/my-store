@@ -1,0 +1,164 @@
+<form (ngSubmit)="onRegister()" #myForm="ngForm">
+  <div class="center">
+    <h1 class="h1"> Registrar </h1>
+    <div class="input-group">
+      <label for="name" class="label"> Nombre </label> <br>
+      <input type="text" name="name" required #nameInputRequired="ngModel" id="nombre" class="input"
+        [(ngModel)]="register.name" [ngClass]="{
+        'valid': nameInputRequired.valid,
+        'invalid': nameInputRequired.invalid
+      }">
+      <p *ngIf="nameInputRequired.invalid" class="mensaje"> Debe registrar su nombre </p>
+    </div>
+    <div class="input-group">
+      <label for="email" class="label"> Email </label> <br>
+      <input type="text" name="email" required #emailInputRequired="ngModel" id="email" class="input"
+        [(ngModel)]="register.email" [ngClass]="{
+        'valid': emailInputRequired.valid,
+        'invalid': emailInputRequired.invalid
+      }">
+      <p *ngIf="emailInputRequired.invalid" class="mensaje"> El correo no puede estar vacío </p>
+    </div>
+    <div class="input-group">
+      <label for="password" class="label"> Password </label> <br>
+      <input type="text" name="password" minlength="5" required #passwordInput="ngModel" id="password" class="input"
+        [(ngModel)]="register.password" [ngClass]="{
+        'valid': passwordInput.valid,
+        'invalid': passwordInput.invalid
+      }">
+      <p *ngIf="passwordInput.invalid" class="mensaje"> La constraseña debe tener mínimo 5 caracteres </p>
+    </div>
+    <div class="buttondiv">
+      <button [disabled]="myForm.invalid" type="submit" class="button"> Registrar </button>
+    </div>
+    <div class="linkdiv">
+      <a href="login" class="a">¿Ya tienes cuenta? Inicia sesión</a>
+    </div>
+  </div>
+</form>
+
+
+<h1> NgClass & NgStyle </h1>
+<input type="text" required #nameInputTest4="ngModel" [(ngModel)]="person.nombre">
+<hr class="line-error" [ngClass]="{
+  'valid': nameInputTest4.valid,
+  'invalid': nameInputTest4.invalid
+}">
+<div class="styles">
+  <div>
+    <input type="number" [(ngModel)]="box.width">
+    <input type="number" [(ngModel)]="box.height">
+    <input type="color" [(ngModel)]="box.background">
+  </div>
+  <div [ngStyle]="{
+    'width.px': box.width,
+    'height.px': box.height,
+    'background-color': box.background,
+    'display': 'block'
+  }"> </div>
+</div>
+<p class="message-error" [class.active]="nameInputTest4.invalid"> El campo es requerido </p>
+
+<h1> Class & Style</h1>
+<input type="text" required #nameInputTest="ngModel" [(ngModel)]="person.nombre">
+<p class="message-error" [class.active]="nameInputTest.invalid"> El campo es requerido </p>
+<label> Nombre </label>
+<input type="text" required #nameInputTest2="ngModel" [(ngModel)]="person.nombre">
+<p [style.font-style]="nameInputTest2.invalid ? 'italic' : 'normal'"> Texto de prueba</p>
+
+<div class="styles">
+  <div>
+    <input type="text" [(ngModel)]="widthImg">
+  </div>
+  <div>
+    <img [style.width.px]="widthImg" [src]="img">
+  </div>
+</div>
+
+
+<h1> Queens </h1>
+<h3> Boletas adquiridas: {{generalCounter}}</h3>
+<h3> Total: {{subtotal}}</h3>
+<div class="queens--grid">
+  <div *ngFor="let queen of queens; index as i">
+    <img [src]="queen.image" alt="image">
+    <h2> {{queen.price}} </h2>
+    <p> {{queen.name}}</p>
+    <p> Entradas: {{queen.counter}} </p>
+    <button (click)="agregarEntrada(i)"> Comprar entrada </button>
+  </div>
+</div>
+
+<h1> Propiedades </h1>
+<button [disabled]="btnDisabled"> Botón </button>
+<button (click)="toggleButton()"> Boton rarito </button>
+<p> Edad {{ person.age }}</p>
+<button (click)="ageIncrement()"> Age ++ </button>
+
+<input type="text" [value]="person.nombre" (keyup)="changeName($event)">
+<p> Nombre {{person.nombre}}</p>
+<progress max="100" [value]="person.age"></progress>
+<img width="200" [src]="img">
+
+<h1> Hola perres </h1>
+<h2>{{'Hola mundo'.repeat(5)}}</h2>
+<p>3+3 = {{ 3+ 3}}</p>
+
+<div class="box" (scroll)="onScroll($event)">
+  asjdhaf sdfjhsdf sdkjfhsdjfkhsdf ajfhd sdfjkhfdhef f sdfjhsdfg dsfjkhdsfldf sdf sdjfhdsf dsf sdjfhsdfasjdhaf sdfjhsdf
+  sdkjfhsdjfkhsdf ajfhd sdfjkhfdhef f sdfjhsdfg dsfjkhdsfldf sdf sdjfhdsf dsf sdjfhsdfasjdhaf sdfjhsdf sdkjfhsdjfkhsdf
+  ajfhd sdfjkhfdhef f sdfjhsdfg dsfjkhdsfldf sdf sdjfhdsf dsf sdjfhsdfasjdhaf sdfjhsdf sdkjfhsdjfkhsdf ajfhd sdfjkhfdhef
+  f sdfjhsdfg dsfjkhdsfldf sdf sdjfhdsf dsf sdjfhsdfasjdhaf sdfjhsdf sdkjfhsdjfkhsdf ajfhd sdfjkhfdhef f sdfjhsdfg
+  dsfjkhdsfldf sdf sdjfhdsf dsf sdjfhsdfasjdhaf sdfjhsdf sdkjfhsdjfkhsdf ajfhd sdfjkhfdhef f sdfjhsdfg dsfjkhdsfldf sdf
+  sdjfhdsf dsf sdjfhsdfasjdhaf sdfjhsdf sdkjfhsdjfkhsdf ajfhd sdfjkhfdhef f sdfjhsdfg dsfjkhdsfldf sdf sdjfhdsf ds
+</div>
+
+
+<h1> Ng Model </h1>
+<input type="text" required #nameInput="ngModel" [(ngModel)]="person.nombre">
+<p> Nombre {{person.nombre}}</p>
+<p> Valid: {{nameInput.valid}}</p>
+
+
+<input type="number" min="10" max="18" required #ageInput="ngModel" [(ngModel)]="person.age">
+<p> Edad {{person.age}}</p>
+<p> Valid: {{ageInput.valid}}</p>
+
+
+<h1> *ngIF </h1>
+<input type="text" required [(ngModel)]="person.nombre">
+<p *ngIf="person.nombre == 'Andrea' && person.age == 18; else elseBlock"> Hola Andrea siu </p>
+<ng-template #elseBlock>
+  <p> Bloque de else </p>
+</ng-template>
+
+<h1> NgFor </h1>
+<input type="text" [(ngModel)]="newName">
+<button (click)="addName()"> Agregar </button>
+<ul>
+  <li *ngIf="names.length == 0"> No hay nada </li>
+  <li *ngFor="let name of names; index as i">
+    {{i}} {{name}} <button (click)="deleteName(i)"> Eliminar </button>
+  </li>
+
+</ul>
+
+<h1>Reto 01: DRAG QUEENS</h1>
+<h2> Agrega una nueva Drag Queen a la lista </h2>
+<p> Nombre: </p> <input type="text" required #validInputName="ngModel" [(ngModel)]="newDrag.nombre"> <br>
+
+<p> Season: </p> <input type="text" required #validInputSeason="ngModel" [(ngModel)]="newDrag.season"><br>
+<!--<p> Valid: {{validInputSeason.valid}}</p>
+<p> Imagen: </p><input type="text" required #validInputImage="ngModel" [(ngModel)]="dragqueen.image">-->
+<p *ngIf="newDrag.nombre!='' && newDrag.season!=''; else elseBlock2"> Ya puedes agregar a tu Drag</p>
+<button [disabled]="newDrag.nombre=='' && newDrag.season=='' " (click)="addDragQueen()">Agregar Drag </button>
+<ng-template #elseBlock2>
+  <p> Debes llenar la información correspondiente </p>
+</ng-template>
+<!--  <p> Valid: {{validInputImage.valid}}</p> -->
+<ul *ngFor="let drag of drags; index as i">
+  <li>
+    <p> Drag Queen: {{drag.nombre}} </p>
+    <p> Season: {{drag.season}}</p> <button (click)="eliminarDrag(i)">Eliminar</button>
+  </li>
+</ul>
