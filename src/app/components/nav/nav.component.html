@@ -1,1 +1,63 @@
-<p>nav works!</p>
+<div class="show-mobile">
+  <div>
+    <a class="logo" href="">
+      <img src="../../../assets/images/logo.jpg">
+    </a>
+    <button (click)="toggleMenu()">
+    <a href="">
+      <img src="../../../assets/images/menu.png">
+    </a>
+  </button>
+    <a href="">
+      <img src="../../../assets/images/carrito.png">
+    </a>
+  </div>
+  <div class="side-menu" [class.active]="activeMenu">
+    <button (click)="toggleMenu()" > Close </button>
+    <ul>
+      <li>
+        <a href=""> Our Queens </a>
+      </li>
+      <li>
+        <a href=""> Buy Tickets </a>
+      </li>
+      <li>
+        <a href=""> Merch </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+  <div class="show-full">
+    <div>
+      <nav>
+        <a href="">
+          <img src="../../../assets/images/logo.jpg">
+        </a>
+        <ul>
+          <li>
+            <a href=""> Our Queens </a>
+          </li>
+          <li>
+            <a href=""> Buy Tickets </a>
+          </li>
+          <li>
+            <a href=""> Merch </a>
+          </li>
+        </ul>
+      </nav>
+        <div class="header-right">
+          <div class="info">
+            <div class="info"> laura.svilla21@gmail.com </div>
+            <div>
+              <a href="">
+                <img src="../../../assets/images/carrito.png">
+              </a>
+            </div>
+          </div>
+        </div>
+    </div>
+
+
+  </div>
+
