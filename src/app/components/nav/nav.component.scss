@@ -18,6 +18,24 @@
   }
 }
 
+.cart {
+  position: relative;
+  .counter {
+    width: 15px;
+    height: 15px;
+    line-height: 20px;
+    background: #ACD9B2;
+    border-radius: 50%;
+    display: block;
+    color: white;
+    text-align: center;
+    font-size: smaller;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+  }
+}
+
 .side-menu{
   position: fixed;
   top: 0;

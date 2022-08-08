@@ -8,9 +8,14 @@
       <img src="../../../assets/images/menu.png">
     </a>
   </button>
+  <div class="cart">
     <a href="">
       <img src="../../../assets/images/carrito.png">
     </a>
+    <span class="counter">{{counter}}</span>
+
+  </div>
+
   </div>
   <div class="side-menu" [class.active]="activeMenu">
     <button (click)="toggleMenu()" > Close </button>
@@ -49,10 +54,11 @@
         <div class="header-right">
           <div class="info">
             <div class="info"> laura.svilla21@gmail.com </div>
-            <div>
+            <div class="cart">
               <a href="">
                 <img src="../../../assets/images/carrito.png">
               </a>
+              <span class="counter">{{counter}}</span>
             </div>
           </div>
         </div>
