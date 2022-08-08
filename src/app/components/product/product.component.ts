@@ -20,11 +20,16 @@ export class ProductComponent{
     }
   }
   @Output() addedTicket = new EventEmitter<Product>();
+  @Output() showProduct = new EventEmitter<string>();
 
   constructor() { }
 
   AddTickets(){
     this.addedTicket.emit(this.product);
+  }
+
+  showDetail(){
+    this.showProduct.emit(this.product.id)
   }
 
 }

@@ -12,6 +12,7 @@ import { ProductsService } from '../../services/products.service';
 export class ProductsComponent implements OnInit {
   myShoppingCart: Product[] = [];
   total = 0;
+  showProductDetail = false;
 
   products: Product[] = [];
 
@@ -26,6 +27,10 @@ export class ProductsComponent implements OnInit {
     this.myShoppingCart = this.StoreService.getShoppingCart();
   }
 
+  toggleProductDetail(){
+    this.showProductDetail = !this.showProductDetail;
+  }
+
   ngOnInit(): void {
     this.productsService.getAllProducts()
     .subscribe(data => {
@@ -37,5 +42,12 @@ export class ProductsComponent implements OnInit {
     console.log(product);
     this.StoreService.addProduct(product);
     this.total = this.StoreService.getTotal();
+  }
+
+  onShowDetail(id: string){
+    this.productsService.getProduct(id).
+    subscribe(data => {
+      console.log('product', data)
+    })
   }
 }
