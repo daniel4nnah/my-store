@@ -1,9 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import url(../src/styles/reset.scss);
-@import url('https://fonts.google.com/specimen/Open+Sans#standard-styles');
+@import 'swiper/scss';
+@import 'swiper/scss/navigation';
+@import 'swiper/scss/pagination';
 
 *{
-  font-family: 'Open Sans', sans-serif;
+  font-family: Helvetica;
 }
 .products--grid{
   app-img{

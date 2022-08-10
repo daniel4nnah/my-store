@@ -28,7 +28,7 @@ export class ProductComponent{
     this.addedTicket.emit(this.product);
   }
 
-  showDetail(){
+  onShowDetail(){
     this.showProduct.emit(this.product.id)
   }
 
