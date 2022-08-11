@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
-import {Queen} from './queens.model'
-import { Product } from '../models/product.model'
+import {Queen} from './queens.model';
+import { AuthService } from './services/auth.service';
+import { UsersService } from './services/users.service'
+
 
 @Component({
   selector: 'app-root',
@@ -15,6 +17,32 @@ export class AppComponent {
   toggleImage(){
     this.showImg = !this.showImg;
 
+  }
+
+  constructor( private authService: AuthService, private userService: UsersService){}
+
+
+  createUser(){
+    this.userService.createNewUser({
+      name: 'sebas',
+      email: 'sebas@gmail.com',
+      password: '1212'
+    })
+    .subscribe(rta => {
+      console.log(rta)
+    })
+    ;
+  }
+
+  loginUser(){
+    this.authService.login(
+      'sebas@gmail.com',
+      '1212'
+    )
+    .subscribe(rta => {
+      console.log(rta.access_token);
+    })
+    ;
   }
 
   title = 'my-store';
