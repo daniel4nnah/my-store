@@ -28,5 +28,7 @@ export class StoreService {
   getShoppingCart(){
     return this.myShoppingCart;
   }
+
+
   constructor() { }
 }

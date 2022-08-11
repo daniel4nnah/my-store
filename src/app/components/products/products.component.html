@@ -13,6 +13,7 @@
   <app-product [product]="product" *ngFor="let product of products" (addedTicket)="onAddToShoppingCart($event)" (showProduct)="onShowDetail($event)"></app-product>
 </div>
 
+<button (click)="loadMore()"> Cargar más </button>
 <div class="product-detail" [class.active]="showProductDetail">
   <div *ngIf="productChosen">
     <button (click)="toggleProductDetail()">Close</button>
@@ -26,6 +27,7 @@
     </swiper>
       <p>{{ productChosen.description }}</p>
       <button (click)="updateProduct()">Editar</button>
+      <button (click)="deleteProduct()"> Eliminar</button>
     </div>
 </div>
 <!--

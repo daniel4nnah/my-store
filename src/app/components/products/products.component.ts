@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CreateProductDTO, Product, UpdateProductDTO } from 'src/models/product.model';
+import { CreateProductDTO, Product } from 'src/models/product.model';
 
 import { StoreService } from '../../services/store.service'
 import { ProductsService } from '../../services/products.service';
@@ -30,6 +30,9 @@ export class ProductsComponent implements OnInit {
     }
   }
 
+  limit = 10;
+  offset = 0;
+
   constructor(
     private storeService: StoreService,
     private productsService: ProductsService
@@ -38,10 +41,21 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.productsService.getAllProducts()
+    this.loadMore();
+  }
+
+  loadMore(){
+    this.productsService.getAllProducts(this.limit, this.offset)
     .subscribe(data => {
-      this.products = data;
+      if(this.offset != 0){
+        this.products = this.products.concat(data);
+      }
+      else if (this.offset == 0){
+        this.products = data;
+      }
     })
+    this.offset += this.limit;
+
   }
 
   onAddToShoppingCart(product: Product){
@@ -86,4 +100,16 @@ export class ProductsComponent implements OnInit {
       this.products[productIndex] = data;
     });
   }
+
+  deleteProduct(){
+    const id = this.productChosen.id;
+    console.log("id", id);
+    this.productsService.deleteProduct(id).subscribe(data =>{
+      const productIndex = this.products.findIndex(item => item.id == this.productChosen.id)
+      console.log(productIndex);
+      this.products.splice(productIndex,1);
+      this.showProductDetail = false;
+    })
+  }
+
 }
