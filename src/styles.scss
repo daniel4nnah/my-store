@@ -3,9 +3,18 @@
 @import 'swiper/scss';
 @import 'swiper/scss/navigation';
 @import 'swiper/scss/pagination';
+@import '~bootstrap/scss/bootstrap';
+@import "/src/app/components/spinner/spinner.component.scss";
 
 *{
   font-family: Helvetica;
+  font-size: small;
+}
+
+button{
+  border-radius: 5px;
+  border: none;
+  margin: 5px;
 }
 .products--grid{
   app-img{

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http'
-import { retry } from 'rxjs/operators'
+import { HttpClient, HttpParams, HttpErrorResponse, HttpStatusCode } from '@angular/common/http'
+import { retry, catchError, map } from 'rxjs/operators'
+import { throwError } from 'rxjs'
+
 
 import { CreateProductDTO, Product, UpdateProductDTO } from 'src/models/product.model';
 
@@ -20,12 +22,29 @@ export class ProductsService {
     }
     return this.http.get<Product[]>(this.apiUrl, {params}).
     pipe(
-      retry(3)
+      retry(3),
+      map(products => products.map(item => {
+        return {
+          ...item,
+          taxes: .19 * item.price
+        }
+      }))
     );
   }
 
   getProduct(id: string){
     return this.http.get<Product>(`${this.apiUrl}/${id}`)
+    .pipe(
+      catchError((error: HttpErrorResponse) =>{
+        if(error.status === HttpStatusCode.Conflict){
+        return throwError('Paila ñera no eres tú soy yo');
+        }
+        if(error.status === HttpStatusCode.NotFound){
+          return throwError('Deje de meter perico');
+          }
+        return throwError('OOPPSSIEEEEEEEEE');
+      })
+    )
   }
 
   createProduct(dto: CreateProductDTO){

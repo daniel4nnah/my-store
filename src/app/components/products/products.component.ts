@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CreateProductDTO, Product } from 'src/models/product.model';
+import { switchMap }from 'rxjs/operators'
+import { zip }from 'rxjs'
+
+import  Swal from 'sweetalert2';
 
 import { StoreService } from '../../services/store.service'
 import { ProductsService } from '../../services/products.service';
@@ -32,6 +36,8 @@ export class ProductsComponent implements OnInit {
 
   limit = 10;
   offset = 0;
+  statusDetail : 'loading' | 'success' | 'error' | 'init' = 'init';
+  loading_var = false;
 
   constructor(
     private storeService: StoreService,
@@ -49,6 +55,7 @@ export class ProductsComponent implements OnInit {
     .subscribe(data => {
       if(this.offset != 0){
         this.products = this.products.concat(data);
+        this.offset += this.limit;
       }
       else if (this.offset == 0){
         this.products = data;
@@ -69,12 +76,54 @@ export class ProductsComponent implements OnInit {
   }
 
   onShowDetail(id: string){
+    this.loadingStatus();
+    this.toggleProductDetail();
     this.productsService.getProduct(id)
     .subscribe(data => {
       console.log('product', data);
-      this.toggleProductDetail();
       this.productChosen = data;
+      this.statusDetail = 'success';
+      Swal.fire({
+        title: 'Success!',
+        text: 'Se cargó correctamente',
+        icon: 'success',
+        confirmButtonText: 'Ok',
+      });
+    }, errorMessage =>
+    {
+      this.statusDetail = 'error';
+      Swal.fire({
+        title: 'Error!',
+        text: errorMessage,
+        icon: 'error',
+        confirmButtonText: 'Ok',
+      });
+
     })
+  }
+
+  readAndUpdate(id: string){
+    this.productsService.getProduct(id)
+    .pipe(
+      switchMap((product) =>
+        this.productsService.updateProduct(product.id, {title: 'change'})
+      )
+    )
+    .subscribe(data => {
+      console.log(data);
+    });
+    zip(
+      this.productsService.getProduct(id),
+      this.productsService.updateProduct(id, {title: 'nuevo'})
+    )
+    .subscribe(response =>{
+      const product = response[0];
+      const update = response[1];
+    })
+  }
+
+  loadingStatus(){
+    this.statusDetail = 'loading';
   }
 
   createNewProduct(){

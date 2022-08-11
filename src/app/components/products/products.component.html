@@ -8,13 +8,20 @@
 <p> {{'Tommitobonito'  | letterToNumber}}</p>
 -->
 <button (click)="createNewProduct()">create</button>
+<button (click)="onShowDetail('121212')">Detail not found</button>
+
 
 <div class="products--grid">
   <app-product [product]="product" *ngFor="let product of products" (addedTicket)="onAddToShoppingCart($event)" (showProduct)="onShowDetail($event)"></app-product>
 </div>
 
+
 <button (click)="loadMore()"> Cargar más </button>
 <div class="product-detail" [class.active]="showProductDetail">
+
+  <app-spinner (whileLoad)="loadingStatus()" *ngIf="statusDetail == 'loading'"></app-spinner>
+
+  {{ statusDetail }}
   <div *ngIf="productChosen">
     <button (click)="toggleProductDetail()">Close</button>
     <h1>{{ productChosen.title }}</h1>

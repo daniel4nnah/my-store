@@ -14,6 +14,7 @@ import { ReversePipe } from './pipes/reverse.pipe';
 import { TimeAgoPipe } from './pipes/time-ago.pipe';
 import { LetterToNumberPipe } from './pipes/letter-to-number.pipe';
 import { HighlightDirective } from './directives/highlight.directive';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { HighlightDirective } from './directives/highlight.directive';
     ReversePipe,
     TimeAgoPipe,
     LetterToNumberPipe,
-    HighlightDirective
+    HighlightDirective,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
